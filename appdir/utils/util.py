@@ -2,11 +2,10 @@ from flask import flash, redirect, url_for, session
 from werkzeug.security import check_password_hash
 
 from appdir import app, db
-from appdir.models import User
+from appdir.models import User, Question
 
 
 def validate_register(form):
-    print(form)
     if form.password.data != form.repassword.data:
         flash('Passwords do not match!', 'error')
         return redirect(url_for('register'))
@@ -33,3 +32,12 @@ def validate_login(form):
         return redirect(url_for('root'))
     flash('Incorrect Password', 'error')
     return redirect(url_for('login'))
+
+
+# 添加问题到数据库
+def addQuestion(title, question):
+    question = Question(title=title, question=question)
+    db.session.add(question)
+    db.session.commit()
+    flash("success question with title:{}".format(title), 'success')
+    return

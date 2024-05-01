@@ -19,8 +19,7 @@ class Question(db.Model):
     """论坛问题"""
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), index=True)
-    description = db.Column(db.String(300), index=True)
-    datetime = db.Column(db.DateTime)
+    question = db.Column(db.String(300), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
@@ -31,6 +30,5 @@ class Answer(db.Model):
     """论坛回答"""
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(1000), index=True)
-    datetime = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))

@@ -5,8 +5,8 @@
 from appdir import app
 from appdir.forms import RegisterForm, LoginForm
 from appdir.models import *
-from flask import render_template, redirect, url_for, flash
-from appdir.utils.util import validate_register, validate_login
+from flask import render_template, redirect, url_for, flash, request
+from appdir.utils.util import validate_register, validate_login, addQuestion
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -35,10 +35,32 @@ def register():
     return render_template('register.html', form=register_form)
 
 
+@app.route('/info', methods=['GET', 'POST'])
+def info():  # put application's code here
+    return render_template('info.html')
+
+
+@app.route('/relateUs', methods=['GET', 'POST'])
+def relateUs():  # put application's code here
+    return render_template('relateUs.html')
+
+
+# 添加论坛问题
+@app.route('/ask', methods=['GET', 'POST'])
+def ask():  # put application's code here
+    if request.method == 'POST':
+        title = request.form.get('title')
+        question = request.form.get('question')
+        addQuestion(title, question)  # 数据库添加论坛问题
+        return render_template('ask.html', title=title, question=question, message="success")
+    else:
+        return render_template('ask.html')
+
+
 # 以下为尚未完成的部分
 @app.route('/test', methods=['GET', 'POST'])
 def test():  # put application's code here
-    return redirect(url_for('index'))
+    return redirect(url_for('ask', message="success"))
 
 
 @app.route('/user', methods=['GET', 'POST'])
