@@ -3,10 +3,10 @@
 """
 
 from appdir import app
-from appdir.forms import RegisterForm, LoginForm
+from appdir.forms import AnswerForm
 from appdir.models import *
-from flask import render_template, redirect, url_for, flash, request
-from appdir.utils.util import validate_register, validate_login, addQuestion
+from flask import render_template, redirect, url_for, flash, request, jsonify
+from appdir.utils.util import validate_register, validate_login, addQuestion, get_all_questions, getAnswerById
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -21,23 +21,36 @@ def index():  # put application's code here
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    login_form = LoginForm()
-    if login_form.validate_on_submit():
-        return validate_login(login_form)
-    return render_template('login.html', form=login_form)
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        print(username, password)
+        validate_login(username, password)
+        return render_template('login.html')
+    else:
+        return render_template('login.html')
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    register_form = RegisterForm()
-    if register_form.validate_on_submit():
-        return validate_register(register_form)
-    return render_template('register.html', form=register_form)
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        repassword = request.form.get('repassword')
+        validate_register(username, password, repassword)
+        return render_template('register.html')
+    else:
+        return render_template('register.html')
 
 
 @app.route('/info', methods=['GET', 'POST'])
 def info():  # put application's code here
     return render_template('info.html')
+
+
+@app.route('/personCenter', methods=['GET', 'POST'])
+def personCenter():  # put application's code here
+    return render_template('personCenter.html')
 
 
 @app.route('/relateUs', methods=['GET', 'POST'])
@@ -46,15 +59,37 @@ def relateUs():  # put application's code here
 
 
 # 添加论坛问题
-@app.route('/ask', methods=['GET', 'POST'])
-def ask():  # put application's code here
+@app.route('/consult', methods=['GET', 'POST'])
+def consult():  # put application's code here
     if request.method == 'POST':
         title = request.form.get('title')
         question = request.form.get('question')
         addQuestion(title, question)  # 数据库添加论坛问题
-        return render_template('ask.html', title=title, question=question, message="success")
+        return render_template('consult.html', title=title, question=question, message="success")
     else:
-        return render_template('ask.html')
+        return render_template('consult.html')
+
+
+# 获取json格式的所有问题
+@app.route('/get_all_questions', methods=['GET', 'POST'])
+def getAllQuestions():  # put application's code here
+    return jsonify(get_all_questions())
+
+
+# 访问论坛
+@app.route('/forum', methods=['GET', 'POST'])
+def forum():
+    return render_template('forum.html', questions=get_all_questions())
+
+
+@app.route('/question<question_id>', methods=['GET', 'POST'])
+def question(question_id):
+    current_question = Question.query.filter(Question.id == question_id).first()
+    answers = getAnswerById(question_id)
+    answer_form = AnswerForm()
+    return render_template('question.html',
+                           question=current_question, answers=answers,
+                           answer_form=answer_form)
 
 
 # 以下为尚未完成的部分

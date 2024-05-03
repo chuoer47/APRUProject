@@ -19,3 +19,9 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()],
                              render_kw={'class': 'form-control'})
     submit = SubmitField('Login', render_kw={'class': 'btn btn-outline-primary', 'id': 'submit'})
+
+
+class AnswerForm(FlaskForm):
+    content = TextAreaField('Content', validators=[DataRequired()],
+                            render_kw={'class': 'form-control', 'id': 'answer-content'})
+    submit = SubmitField('Post', render_kw={'class': 'btn btn-outline-primary', 'id': 'submit-answer'})

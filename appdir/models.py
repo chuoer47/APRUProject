@@ -21,7 +21,7 @@ class Question(db.Model):
     title = db.Column(db.String(100), index=True)
     question = db.Column(db.String(300), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
+    datetime = db.Column(db.DateTime)
     def __repr__(self):
         return '<Question {}>'.format(self.title)
 

@@ -13,38 +13,56 @@
 
 </head>
 <body>
-<div class="container">
+<div class="container" style="width:100%;">
     <div class="row clearfix">
-        <div class="col-md-12 column">
-            <ul class="nav nav-tabs">
-                <li class="active">
-                    <a href="/index">首页</a>
+        <div class="col-md-12 column"
+             style="background:linear-gradient(to bottom, rgb(27, 101, 185), rgba(27, 101, 185, 1));position:fixed;z-index:1000;height:150px;">
+            <ul class="nav nav-tabs" style="height:150px;">
+                <li class="active" style="height:150px;width:150px;color:">
+                    <div class="centered-text" style="background-color:rgb(96,166,232);border-radius:20px;height:130px"
+                         id="homeHover">
+                        <a class="centered-text" href="/index"
+                           style="height:140px;width:140px;font-size:30px;color:white">Home</a>
+                    </div>
                 </li>
-                <li>
-                    <a href="/forum">论坛</a>
+                <li style="height:150px;width:150px;margin-left:20px;">
+                    <div class="centered-text" style="border-radius:20px;height:130px;margin-left:20px" id="forumHover">
+                        <a class="centered-text" style="height:140px;width:140px;font-size:30px;color:white"
+                           href="/forum">Forum</a>
+                    </div>
                 </li>
-                <li>
-                    <a href="/info">信息</a>
+                <li style="height:150px;width:150px;margin-left:20px;">
+                    <div class="centered-text" style="border-radius:20px;height:130px;" id="InfoHover">
+                        <a class="centered-text" style="height:140px;width:140px;font-size:30px;color:white"
+                           href="/info">Information</a>
+                    </div>
                 </li>
-                <li>
-                    <a href="/ask">提问</a>
+                <li style="height:150px;width:150px;color:margin-left:20px;">
+                    <div class="centered-text" style="border-radius:20px;height:130px;margin-left:20px"
+                         id="consultHover">
+                        <a class="centered-text" style="height:140px;width:140px;font-size:30px;color:white"
+                           href="/consult">Consult</a>
+                    </div>
                 </li>
-                <li class="dropdown pull-right">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">个人<strong class="caret"></strong></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="/login">登录</a>
-                        </li>
-                        <li>
-                            <a href="/register">注册</a>
-                        </li>
-                        <li>
-                            <a href="/personCenter">个人中心</a>
-                        </li>
-                        <li>
-                            <a href="/relateUs">关于我们</a>
-                        </li>
-                    </ul>
+                <li class="dropdown pull-right" style="height:150px;width:150px;">
+                    <div class="centered-text" style="border-radius:20px;height:130px;" id="accountHover">
+                        <a class="centered-text" style="height:140px;width:140px;font-size:30px;color:white" href="#"
+                           data-toggle="dropdown">Account<strong class="caret"></strong></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/login">Login</a>
+                            </li>
+                            <li>
+                                <a href="/register">Register</a>
+                            </li>
+                            <li>
+                                <a href="/personCenter">Personal center</a>
+                            </li>
+                            <li>
+                                <a href="/relateUs">About us</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -59,4 +77,22 @@
     <label style="font-size: 12px;color: #8a8a8a">制作者: XJTUer</label>
 </div>
 </body>
+
+<style>
+    button:focus {
+        border: none;
+    }
+
+    .centered-text {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .centered-text.open {
+        background-color: rgb(96, 166, 232);
+    }
+</style>
 </html>

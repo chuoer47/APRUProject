@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    <!-- carousel CSS -->
+
+    <script src="../static/script/consult.js"></script>
     <link rel="stylesheet" href="../static/css/owl.carousel.min.css" type="text/css" media="all">
     <!-- nivo-slider CSS -->
     <link rel="stylesheet" href="../static/css/nivo-slider.css" type="text/css" media="all">
@@ -25,84 +26,59 @@
     <link rel="stylesheet" href="../static/css/widget.css" type="text/css" media="all">
     <!-- responsive CSS -->
     <link rel="stylesheet" href="../static/css/responsive.css" type="text/css" media="all">
-    <!-- modernizr js -->
-    <script src="js/modernizr-3.5.0.min.js"></script>
-    <script src="../static/script/login.js"></script>
     <link href='../static/css/css.css' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="../static/css/animated-text.css" type="text/css" media="all">
-
-    <div class="login-section d-flex align-items-center" style="margin-top:150px">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="single-login">
+    <script>
+        function clearForm() {
+            document.getElementById("questionForm").reset();
+        }
+    </script>
+    <div class="row clearfix"
+         style="height:800px;margin-top:150px;background:linear-gradient(to bottom, rgba(27, 101, 185, 0.3), rgba(27, 101, 185, 0));">
+        <div class="container" style="">
+            <div class="row align-items-center" style="display:flex;justify-content: center;align-items: center;">
+                <div class="col-lg-6" style="width:1000px">
+                    <div class="single_login" style="background-color:white;margin-top:50px;">
                         <div class="login-title">
-                            <h1>Welcome Back !</h1>
-                        </div>
-                        <div class="login-disaription">
-                            <p>Keep your face always toward the sunshine - and shadows will fall behind you.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="single_login">
-                        <div class="login-title">
-                            <h3>Register</h3>
+                            <h3>Consultation</h3>
                         </div>
                         <div class="login-text">
-                            <p>Sign in to your account to continue.</p>
+                            <p>Consult us if you have any questions</p>
                             {% for message in get_flashed_messages() %}
                                 {% if message %}
                                     <div style="color:red">{{ message }}</div>
-                        {% endif %}
+                                {% endif %}
                             {% endfor %}
                         </div>
                         <div class="row">
-                            <form id="registerForm" role="form" action="/register" method="post" novalidate>
+                            <form id="questionForm" role="form" action="/consult" method="post" novalidate>
                                 <div class="col-lg-12">
-                                    <div class="form-text">
-                                        <p>Personal Accounts</p>
-                                    </div>
                                     <div class="form_box">
-                                        <input type="text" id="username" name="username"
-                                               placeholder="Enter your Account">
+                                        <label for="title">Title</label>
+                                        <input type="text" id="title" name="title"
+                                               placeholder="example:Diabetes rehabilitation"
+                                               {% if title %}value="{{ title }}"{% endif %}
+                                               {% if title %}readonly{% endif %}>
                                         <span><i class="bi bi-envelope"></i></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="form-text">
-                                        <p>Password</p>
-                                    </div>
                                     <div class="form_box">
-                                        <input type="password" id="password" name="password"
-                                               placeholder="Enter your Password">
-                                        <span><i class="bi bi-lock"></i></span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-text">
-                                        <p>Confirm Password</p>
-                                    </div>
-                                    <div class="form_box">
-                                        <input type="password" id="repassword" name="repassword"
-                                               placeholder="Enter your Password Again">
-                                        <span><i class="bi bi-lock"></i></span>
+                                        <label for="question">Question</label>
+                                        <textarea id="question"
+                                                  name="question" rows="7"
+                                                  {% if question %}readonly{% endif %}
+                                                  placeholder="Please input your question"> {{ question }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12">
-                                    <div class="form-submit">
-                                        <input class="registerBTN" type="submit" id="submit" name="submit"
-                                               value="register">
+                                    <div class="form-submit"
+                                         style="display:flex;justify-content: center;align-items: center;">
+                                        <button type="submit" class="submitBTN">Submit</button>
+                                        <button type="button" onclick="clearForm()" class="clearBTN">Clear</button>
                                     </div>
                                 </div>
                             </form>
-
-                        </div>
-                        <div id="status"></div>
-                        <div class="login_bottom">
-                            <div class="bottom-text">
-                                <h5>Alredy registered? <a href="/login">Try login!</a></h5>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -110,19 +86,41 @@
         </div>
     </div>
 
+
+
     <style>
-        .registerBTN {
-            width: 460px;
-            height: 50px;
+
+        .submitBTN {
+            font-size: 22px;
             color: white;
-            font-size: 20px;
             background-color: rgb(52, 146, 252);
+            width: 200px;
+            height: 50px;
             border-radius: 10px;
+            margin-bottom: 20px;
+            margin-left: 50px;
             border: none;
         }
 
-        .registerBTN:hover {
-            font-size: 25px;
+        .submitBTN:hover {
+            font-size: 27px;
+            background-color: rgb(96, 166, 232);
+        }
+
+        .clearBTN {
+            font-size: 22px;
+            color: white;
+            background-color: rgb(52, 146, 252);
+            width: 200px;
+            height: 50px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            margin-left: 50px;
+            border: none;
+        }
+
+        .clearBTN:hover {
+            font-size: 27px;
             background-color: rgb(96, 166, 232);
         }
     </style>

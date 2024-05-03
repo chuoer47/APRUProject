@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="../static/script/info.js"></script>
+    <div class="container" style="margin-top:150px">
+        <h1>论坛开发ing</h1>
+        {% for question in questions %}
+            <div class="card text-left">
+                <h5 class="card-header">
+                    <img src="../static/image/bootstrap-icon/person-fill.svg" width="25" height="25"
+                         class="d-inline-block align-middle"
+                         alt="" loading="lazy">
+                    <span class="align-middle">Somebody</span>
+                </h5>
+                <div class="card-body">
+                    <h5 class="card-title">{{ question.title }}</h5>
+                    <p class="card-text">{{ question.description }}</p>
+                    <div id="my-div">
+                        <p class="card-text text-muted">{{ question.time }}</p>
+                        {# 这里的界面和逻辑还需要完善                       #}
+                        <a href="/question{{ question.id }}" class="btn btn-outline-primary">View answers</a>
+                        <span class="card-text info text-muted">{{ question.answers }} Answers</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
