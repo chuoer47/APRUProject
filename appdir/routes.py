@@ -2,10 +2,12 @@
 该类设置路由
 """
 
-from appdir import app
+from appdir import app, config
 from appdir.forms import AnswerForm
 from appdir.models import *
 from flask import render_template, redirect, url_for, flash, request, jsonify
+
+from appdir.utils.dict_article import dic_article
 from appdir.utils.util import validate_register, validate_login, addQuestion, get_all_questions, getAnswerById
 
 
@@ -91,6 +93,18 @@ def question(question_id):
                            question=current_question, answers=answers,
                            answer_form=answer_form)
 
+
+# ————————————————————————————————————————————————————————————
+# 以下为文章的路由地址，由于我不会统一开发，只能这样子
+
+
+@app.route('/article<id>', methods=['GET', 'POST'])
+def article(id):
+    link = dic_article[id]
+    return render_template(link)
+
+
+# ——————————————————————————————————————————————————————————————————
 
 # 以下为尚未完成的部分
 @app.route('/test', methods=['GET', 'POST'])

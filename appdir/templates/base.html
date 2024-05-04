@@ -13,6 +13,7 @@
 
 </head>
 <body>
+
 <div class="container" style="width:100%;">
     <div class="row clearfix">
         <div class="col-md-12 column"
@@ -67,15 +68,19 @@
             </ul>
         </div>
     </div>
-    {% block content %}{% endblock %}
 </div>
 
+{% block content %}{% endblock %}
 
-<div class="text-center" style="margin-top: 200px">
-    <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color=#987cb9 SIZE=3>
-    <label style="font-size: 12px;color: red">本网站仅供APRU项目展示</label><br>
-    <label style="font-size: 12px;color: #8a8a8a">制作者: XJTUer</label>
-</div>
+
+<footer class="footer">
+    <div class="container text-center">
+        <hr class="mb-3">
+        <p class="text-danger">本网站仅供APRU项目展示</p>
+        <p class="text-muted">制作者: XJTUer</p>
+    </div>
+</footer>
+
 </body>
 
 <style>
