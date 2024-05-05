@@ -13,54 +13,50 @@
 
 </head>
 <body>
-
-<div class="container" style="width:100%;">
+<div class="container_test" style="width:100%;">
     <div class="row clearfix">
         <div class="col-md-12 column"
-             style="background:linear-gradient(to bottom, rgb(27, 101, 185), rgba(27, 101, 185, 1));position:fixed;z-index:1000;height:150px;">
-            <ul class="nav nav-tabs" style="height:150px;">
-                <li class="active" style="height:150px;width:150px;color:">
-                    <div class="centered-text" style="background-color:rgb(96,166,232);border-radius:20px;height:130px"
+             style="background:linear-gradient(to bottom, rgb(27, 101, 185), rgba(27, 101, 185, 1));position:fixed;z-index:1000;height:100px;width:101%">
+            <ul class="nav nav-tabs" style="height:100px;width:100%">
+                <li class="active" style="height:100px;width:100px;margin-left:20px;">
+                    <div class="centered-text"
+                         style="background-color:rgb(96,166,232);border-radius:20px;height:80px;width:100px"
                          id="homeHover">
-                        <a class="centered-text" href="/index"
-                           style="height:140px;width:140px;font-size:30px;color:white">Home</a>
+                        <a class="navi-item" href="/index">Home</a>
                     </div>
                 </li>
-                <li style="height:150px;width:150px;margin-left:20px;">
-                    <div class="centered-text" style="border-radius:20px;height:130px;margin-left:20px" id="forumHover">
-                        <a class="centered-text" style="height:140px;width:140px;font-size:30px;color:white"
-                           href="/forum">Forum</a>
+                <li style="height:100px;width:100px;">
+                    <div class="centered-text" style="border-radius:20px;height:80px;margin-left:20px" id="forumHover">
+                        <a class="navi-item" href="/forum">Forum</a>
                     </div>
                 </li>
-                <li style="height:150px;width:150px;margin-left:20px;">
-                    <div class="centered-text" style="border-radius:20px;height:130px;" id="InfoHover">
-                        <a class="centered-text" style="height:140px;width:140px;font-size:30px;color:white"
-                           href="/info">Information</a>
+                <li style="height:100px;width:150px;margin-left:20px;">
+                    <div class="centered-text" style="border-radius:20px;height:80px;width:150px;" id="InfoHover">
+                        <a class="navi-item" href="/info">Information</a>
                     </div>
                 </li>
-                <li style="height:150px;width:150px;color:margin-left:20px;">
-                    <div class="centered-text" style="border-radius:20px;height:130px;margin-left:20px"
+                <li style="height:100px;width:100px;color:margin-left:20px;">
+                    <div class="centered-text" style="border-radius:20px;height:80px;width:100px;margin-left:20px"
                          id="consultHover">
-                        <a class="centered-text" style="height:140px;width:140px;font-size:30px;color:white"
-                           href="/consult">Consult</a>
+                        <a class="navi-item" href="/consult">Consult</a>
                     </div>
                 </li>
-                <li class="dropdown pull-right" style="height:150px;width:150px;">
-                    <div class="centered-text" style="border-radius:20px;height:130px;" id="accountHover">
-                        <a class="centered-text" style="height:140px;width:140px;font-size:30px;color:white" href="#"
-                           data-toggle="dropdown">Account<strong class="caret"></strong></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="/login">Login</a>
+                <li class="dropdown pull-right" style="height:100px;width:150px;left:-50px">
+                    <div class="centered-text" style="border-radius:20px;height:80px;width:120px" id="accountHover">
+                        <a class="navi-item" href="#"
+                           data-toggle="dropdown" id="test">Account<strong class="caret"></strong></a>
+                        <ul class="dropdown-menu" style="border-radius:10px;">
+                            <li class="menu">
+                                <a class="menu-item" href="/login">Login</a>
                             </li>
-                            <li>
-                                <a href="/register">Register</a>
+                            <li class="menu">
+                                <a class="menu-item" href="/register">Register</a>
                             </li>
-                            <li>
-                                <a href="/personCenter">Personal center</a>
+                            <li class="menu">
+                                <a class="menu-item" href="/personCenter">Personal center</a>
                             </li>
-                            <li>
-                                <a href="/relateUs">About us</a>
+                            <li class="menu">
+                                <a class="menu-item" href="/aboutUs">About us</a>
                             </li>
                         </ul>
                     </div>
@@ -68,19 +64,15 @@
             </ul>
         </div>
     </div>
+    {% block content %}{% endblock %}
 </div>
 
-{% block content %}{% endblock %}
 
-
-<footer class="footer">
-    <div class="container text-center">
-        <hr class="mb-3">
-        <p class="text-danger">本网站仅供APRU项目展示</p>
-        <p class="text-muted">制作者: XJTUer</p>
-    </div>
-</footer>
-
+<div class="text-center" style="margin-top: 200px">
+    <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color=#987cb9 SIZE=3>
+    <label style="font-size: 12px;color: red">本网站仅供APRU项目展示</label><br>
+    <label style="font-size: 12px;color: #8a8a8a">制作者: XJTUer</label>
+</div>
 </body>
 
 <style>
@@ -93,11 +85,32 @@
         display: flex;
         justify-content: center;
         align-items: center;
-
     }
 
-    .centered-text.open {
-        background-color: rgb(96, 166, 232);
+    a.navi-item {
+        font-size: 25px;
+        color: white;
+    }
+
+    a.navi-item:hover {
+        font-size: 30px;
+        color: white;
+    }
+
+    .open #test {
+        background-color: rgb(27, 101, 185);
+    }
+
+    li.menu {
+        height: 35px;
+    }
+
+    a.menu-item {
+        font-size: 20px;
+    }
+
+    a.menu-item:hover {
+        font-size: 22px;
     }
 </style>
 </html>

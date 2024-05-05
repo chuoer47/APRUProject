@@ -1,48 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
-    <script src="../static/script/info.js"></script>
 
     <div class="container" style="margin-top:150px">
         <div class="row clearfix">
             <div class="col-md-12 column">
-                <h3>
-                    h3. 这是一套可视化布局系统.
-                </h3>
-                <p class="text-left">
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong>
-                    编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small>
-                    社区中。
-                </p>
-                <p class="text-left">
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong>
-                    编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small>
-                    社区中。
-                </p>
-                <p>
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong>
-                    编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small>
-                    社区中。
-                </p>
-                <p>
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong>
-                    编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small>
-                    社区中。
-                </p>
+                <div class="container">
+                    <h1>Daily Reminder</h1>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>TODO-{{ reminder_data[0].datetime }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in reminder_data %}
+                            <tr>
+                                <td>{{ item.reminder }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div>
-
-                <a href="{{ url_for('dailyDataForm') }}">
-                    <button>dailyDataForm</button>
-                </a>
-                <a href="{{ url_for('reportsForm') }}">
-                    <button>reportsForm</button>
-                </a>
-                <a href="{{ url_for('objectivesForm') }}">
-                    <button>objectivesForm</button>
-                </a>
-                <a href="{{ url_for('dailyReminderForm') }}">
-                    <button>dailyReminderForm</button>
-                </a>
+            <div class="col-md-12 column">
+                <div class="container">
+                    <h1>Daily Data</h1>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Blood glucose</th>
+                            <th>Composition of Diet</th>
+                            <th>Amount of exercise</th>
+                            <th>Time</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in daily_data %}
+                            <tr>
+                                <td>{{ item.blood_glucose }}</td>
+                                <td>{{ item.amount_of_exercise }}</td>
+                                <td>{{ item.composition_of_Diet }}</td>
+                                <td>{{ item.datetime }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

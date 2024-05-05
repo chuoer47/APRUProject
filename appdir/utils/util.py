@@ -4,6 +4,8 @@ from appdir import db
 from appdir.models import User, Question, Answer, DailyReminder, Objectives, HospitalExaminationReports, DailyData
 
 
+# ——————————————————————————————————————
+# 下面为注册登录所需方法
 def validate_register(username, password, repassword):
     if password != repassword:
         flash('Passwords do not match!', 'error')
@@ -32,8 +34,15 @@ def validate_login(username, password):
     return redirect(url_for('login'))
 
 
+# ——————————————————————————————
+
+
+# ——————————————————————————————
 # 添加问题到数据库
 def addQuestion(title, question):
+    if not title and not question:
+        flash("Please fill in all the required fields", 'error')
+        return redirect(url_for('consult'))
     now_time = datetime.now()
     question = Question(title=title, question=question, datetime=now_time)
     db.session.add(question)
@@ -42,6 +51,11 @@ def addQuestion(title, question):
     return
 
 
+# ——————————————————————————————
+
+
+# ————————————————————————————————————
+# 下面为论坛的开发模块需要的方法
 def get_all_questions():
     questions = Question.query.all()
     question_data = []
@@ -68,6 +82,9 @@ def getAnswerById(questionId):
             'question_id': answer.question_id
         })
     return answer_data
+
+
+# ——————————————————————————————————
 
 
 # ——————————————————————————————————
@@ -136,4 +153,42 @@ def solveDailyDataForm(blood_glucose, diet_composition, exercise_amount):
     flash("Form submitted successfully", 'success')
     return
 
+
+# ——————————————————————————————————
+
+
+# ——————————————————————————————————
+# 下面为个人中心需要的网页资源获取函数
+def getDailyReminder():
+    reminders = DailyReminder.query.first()
+    # 处理一下日期格式
+    datetime = str(reminders.datetime)
+    datetime = datetime.split(" ")[0]
+    print(datetime)
+    reminders_data = [{
+        'id': reminders.id,
+        'datetime': datetime,
+        'user_id': reminders.user_id,
+        'reminder': reminders.reminder
+    }]
+    return reminders_data
+
+
+def getDailyData():
+    dailyDatas = DailyData.query.all()
+    dailyData = []
+
+    for daily_data in dailyDatas:
+        # 处理一下日期格式
+        datetime = str(daily_data.datetime)
+        datetime = datetime.split(" ")[0]
+        dailyData.append({
+            'id': daily_data.id,
+            'datetime': datetime,
+            'user_id': daily_data.user_id,
+            'blood_glucose': daily_data.blood_glucose,
+            'amount_of_exercise': daily_data.amount_of_exercise,
+            'composition_of_Diet': daily_data.composition_of_Diet
+        })
+    return dailyData
 # ——————————————————————————————————

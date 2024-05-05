@@ -1,65 +1,62 @@
 {% extends 'personCenterForm/formBase.html' %}
 {% block form %}
-    <div class="row clearfix"
-         style="height:800px;margin-top:150px;background:linear-gradient(to bottom, rgba(27, 101, 185, 0.3), rgba(27, 101, 185, 0));">
-        <div class="container" style="">
-            <div class="row align-items-center" style="display:flex;justify-content: center;align-items: center;">
-                <div class="col-lg-6" style="width:1000px">
-                    <div class="single_login" style="background-color:white;margin-top:50px;">
-                        <div class="login-title">
-                            <h3>Daily data</h3>
-                        </div>
-                        <div class="login-text">
-                            <p>Please input your daily data</p>
-                            {% for message in get_flashed_messages() %}
-                                {% if message %}
-                                    <div style="color:red">{{ message }}</div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                        <div class="row">
-                            <form id="questionForm" role="form" action="/dailyDataForm" method="post" novalidate>
-                                <div class="col-lg-12">
-                                    <div class="form_box">
-                                        <label for="blood_glucose">Blood Glucose</label>
-                                        <input type="text" id="blood_glucose" name="blood_glucose"
-                                               placeholder="Enter blood glucose level"
-                                               {% if blood_glucose %}value="{{ blood_glucose }}"{% endif %}>
-                                        <span><i class="bi bi-envelope"></i></span>
-                                    </div>
-                                </div>
 
-                                <div class="col-lg-12">
-                                    <div class="form_box">
-                                        <label for="diet_composition">Composition of Diet</label>
-                                        <input type="text" id="diet_composition" name="diet_composition"
-                                               placeholder="Enter diet composition"
-                                               {% if diet_composition %}value="{{ diet_composition }}"{% endif %}>
-                                        <span><i class="bi bi-envelope"></i></span>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form_box">
-                                        <label for="exercise_amount">Amount of Exercise</label>
-                                        <input type="text" id="exercise_amount" name="exercise_amount"
-                                               placeholder="Enter amount of exercise"
-                                               {% if exercise_amount %}value="{{ exercise_amount }}"{% endif %}>
-                                        <span><i class="bi bi-envelope"></i></span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12">
-                                    <div class="form-submit"
-                                         style="display:flex;justify-content: center;align-items: center;">
-                                        <button type="submit" class="submitBTN">Submit</button>
-                                        <button type="button" onclick="clearForm()" class="clearBTN">Clear</button>
-                                    </div>
-                                </div>
-                            </form>
+    <div class="row align-items-center" style="display:flex;justify-content: center;align-items: center;">
+        <div class="col-lg-6" style="width:1000px">
+            <div class="single_login" style="background-color:white;margin-top:50px;">
+                <div class="login-title">
+                    <h3>Daily data</h3>
+                </div>
+                <div class="login-text">
+                    <p>Please input your daily data</p>
+                    {% for message in get_flashed_messages() %}
+                        {% if message %}
+                            <div style="color:red">{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <form id="questionForm" role="form" action="/dailyDataForm" method="post" novalidate>
+                        <div class="col-lg-12">
+                            <div class="form_box">
+                                <label for="blood_glucose">Blood Glucose</label>
+                                <input type="text" id="blood_glucose" name="blood_glucose"
+                                       placeholder="Enter blood glucose level"
+                                       {% if blood_glucose %}value="{{ blood_glucose }}"{% endif %}>
+                                <span><i class="bi bi-envelope"></i></span>
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="col-lg-12">
+                            <div class="form_box">
+                                <label for="diet_composition">Composition of Diet</label>
+                                <input type="text" id="diet_composition" name="diet_composition"
+                                       placeholder="Enter diet composition"
+                                       {% if diet_composition %}value="{{ diet_composition }}"{% endif %}>
+                                <span><i class="bi bi-envelope"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form_box">
+                                <label for="exercise_amount">Amount of Exercise</label>
+                                <input type="text" id="exercise_amount" name="exercise_amount"
+                                       placeholder="Enter amount of exercise"
+                                       {% if exercise_amount %}value="{{ exercise_amount }}"{% endif %}>
+                                <span><i class="bi bi-envelope"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-submit"
+                                 style="display:flex;justify-content: center;align-items: center;">
+                                <button type="submit" class="submitBTN">Submit</button>
+                                <button type="button" onclick="clearForm()" class="clearBTN">Clear</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}

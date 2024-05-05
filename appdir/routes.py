@@ -9,7 +9,7 @@ from flask import render_template, redirect, url_for, flash, request, jsonify
 
 from appdir.utils.article_dataset import dic_article
 from appdir.utils.util import validate_register, validate_login, addQuestion, get_all_questions, getAnswerById, \
-    solveDailyReminder, solveObjectivesForm, solveReportsForm, solveDailyDataForm
+    solveDailyReminder, solveObjectivesForm, solveReportsForm, solveDailyDataForm, getDailyReminder, getDailyData
 
 
 # 根路由
@@ -60,7 +60,11 @@ def info():  # put application's code here
 # 个人中心
 @app.route('/personCenter', methods=['GET', 'POST'])
 def personCenter():  # put application's code here
-    return render_template('personCenter.html')
+    reminder_data = getDailyReminder()
+    daily_data = getDailyData()
+    return render_template('personCenter.html',
+                           reminder_data=reminder_data,
+                           daily_data=daily_data)
 
 
 # dailyReminderForm.html
@@ -137,9 +141,9 @@ def dailyDataForm():  # put application's code here
 # ——————————————————————————————————————————————————————————————————————
 
 # 关于我们
-@app.route('/relateUs', methods=['GET', 'POST'])
-def relateUs():  # put application's code here
-    return render_template('relateUs.html')
+@app.route('/aboutUs', methods=['GET', 'POST'])
+def aboutUs():  # put application's code here
+    return render_template('aboutUs.html')
 
 
 # 添加论坛问题

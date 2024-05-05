@@ -1,28 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
-    <script src="../static/script/info.js"></script>
-    <div class="container" style="margin-top:150px">
-        <h1>论坛开发ing</h1>
-        {% for question in questions %}
-            <div class="card text-left">
-                <h5 class="card-header">
-                    <img src="../static/image/bootstrap-icon/person-fill.svg" width="25" height="25"
-                         class="d-inline-block align-middle"
-                         alt="" loading="lazy">
-                    <span class="align-middle">Somebody</span>
-                </h5>
-                <div class="card-body">
-                    <h5 class="card-title">{{ question.title }}</h5>
-                    <p class="card-text">{{ question.description }}</p>
-                    <div id="my-div">
-                        <p class="card-text text-muted">{{ question.time }}</p>
-                        {# 这里的界面和逻辑还需要完善                       #}
-                        <a href="/question{{ question.id }}" class="btn btn-outline-primary">View answers</a>
-                        <span class="card-text info text-muted">{{ question.answers }} Answers</span>
-                    </div>
+    <script src="../static/script/forum.js"></script>
+    <link rel="stylesheet" href="../static/css/forum.css" type="text/css" media="all">
+    <div class="container">
+        <h1 style="margin-top:150px;margin-left:30px;">论坛开发ing</h1>
+        <div class="forum-container">
+
+            <div class="left_row">
+                <div class="navi-forum"></div>
+                <div class="forum-info">
+                    {% for question in questions %}
+                        <div class="forum-msg">
+                            <div class="photo-and-name">
+                                <div class="photo">
+                                    <img src="../static/image/bootstrap-icon/person-fill.svg"
+                                         style="width:50px;height:50px;" alt="" loading="lazy">
+                                </div>
+                                <div class="name">Somebody</div>
+                            </div>
+                            <div class="content">
+                                <div class="title">{{ question.title }}</div>
+                                <div class="text" id={{ question.id }}>{{ question.question }}</div>
+                                <div class="tip">
+                                    <a id="tips" class="showMore" onclick="expand(this,{{ question.id }})">Show more</a>
+                                </div>
+                                <div class="otherItem">
+                                    <p class="time" style="font-size:15px;">{{ question.time }}</p>
+                                    这里显示问题的时间
+                                    <a href="/question{{ question.id }}" class="check-answer">View answers</a>
+                                    <span class="card-text info text-muted">{{ question.answers }} Answers</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-        {% endfor %}
+
+            <div class="right_row">
+                <div class="news-info">
+                </div>
+            </div>
+        </div>
     </div>
 
 

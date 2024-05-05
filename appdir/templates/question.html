@@ -1,100 +1,74 @@
 {% extends 'base.html' %}
 {% block content %}
-    <style>
-        .card {
-            margin: 30px;
-        }
+    <link rel="stylesheet" href="../static/css/question.css" type="text/css" media="all">
+    <script src="../static/script/forum.js"></script>
 
-        .info {
-            margin-left: 20px;
-        }
+    <div class="container">
+        <div class="question-container">
+            <div class="question-title">{{ question.title }}</div>
+            <div class="question-content" id={{ question.id }}>{{ question.question }}</div>
+            <div class="tip">
+                <a id="tips" class="showMore" onclick="expand(this,{{ question.id }})">Show more</a>
+            </div>
+            <div class="answer">
+                {% if answers | length == 0 %}
+                    <p class="card-text" style="margin-top: 20px;">This question has not been answered so far.</p>
+                {% endif %}
+                {% for answer in answers %}
+                    <div class="answer-content">
+                        <div class="photo-and-name">
+                            <div class="photo">
+                                <img src="../static/image/bootstrap-icon/person-fill.svg"
+                                     style="width:50px;height:50px;" alt="" loading="lazy">
+                            </div>
+                            <div class="name">{{ answer.username }}</div>
+                        </div>
+                        <div class="answer-boby">
+                            <div class="answer-text" id={{ answer.id }}>{{ answer.content }}</div>
+                            <div class="tip">
+                                <a id="content-tips" class="showMore" onclick="expandContent(this,{{ answer.id }})">Show
+                                    more</a>
+                            </div>
+                            <div class="collapse multi-collapse" id="multiCollapse{{ loop.index }}">
+                                <div class="card">
+                                    <h5 class="card-header">
+                                        <span class="align-middle">{{ answer.comments | length }} comment</span>
+                                    </h5>
+                                    <div class="card-body">
+                                        {% for comment in answer.comments %}
+                                            <div>
+                                                <img src="../static/image/bootstrap-icon/person-fill.svg" width="20"
+                                                     height="20"
+                                                     class="d-inline-block align-middle"
+                                                     alt="" loading="lazy" style="margin-left: 0px">
+                                                <span class="align-middle"
+                                                      style="font-weight: bold">{{ comment.username }}</span>
+                                            </div>
 
-        #my-div {
-            margin-top: 30px;
-        }
-
-        #write {
-            margin-right: 20px;
-        }
-
-        #my-div img {
-            margin-left: 60px;
-            cursor: pointer;
-        }
-
-        #answer-content {
-            height: 300px;
-        }
-
-        .agree-btn {
-            width: 80px;
-        }
-
-        .disagree-btn {
-            width: 80px;
-        }
-
-        .follow-btn {
-            margin-left: 10px;
-        }
-
-    </style>
-    <div class="card text-center" style="margin-top:150px">
-        <div class="card-body">
-            <h5 class="card-title">{{ question.title }}</h5>
-            <p class="card-text">{{ question.question }}</p>
-            {% if answers | length == 0 %}
-                <p class="card-text" style="margin-top: 20px">This question has not been answered so far.</p>
-            {% endif %}
-            {% for answer in answers %}
-                <div class="card text-left">
-                    <h5 class="card-header">
-                        <img src="../static/image/bootstrap-icon/person-fill.svg" width="25" height="25"
-                             class="d-inline-block align-middle"
-                             alt="" loading="lazy">
-                        <span class="align-middle">{{ answer.username }}</span>
-                    </h5>
-                    <div class="card-body">
-                        <p class="card-text">{{ answer.content }}</p>
-                        <div class="collapse multi-collapse" id="multiCollapse{{ loop.index }}">
-                            <div class="card">
-                                <h5 class="card-header">
-                                    <span class="align-middle">{{ answer.comments | length }} comment</span>
-                                </h5>
-                                <div class="card-body">
-                                    {% for comment in answer.comments %}
-                                        <div>
-                                            <img src="../static/image/bootstrap-icon/person-fill.svg" width="20"
-                                                 height="20"
-                                                 class="d-inline-block align-middle"
-                                                 alt="" loading="lazy" style="margin-left: 0px">
-                                            <span class="align-middle"
-                                                  style="font-weight: bold">{{ comment.username }}</span>
-                                        </div>
-
-                                        <p class="card-text" style="margin-top: 20px">{{ comment.content }}</p>
-                                        <hr>
-                                    {% endfor %}
-                                </div>
-                                <div class="card-footer">
-                                    <div class="container">
-                                        <div class="row">
-                                            <span style="display: none">{{ answer.id }}</span>
-                                            <input type="text" class="form-control col-10 comment-text"
-                                                   placeholder="Write your comment...">
-                                            <span class="col-1"> </span>
-                                            <button class="btn form-control col-1 btn-outline-primary submit-comment">
-                                                Post
-                                            </button>
+                                            <p class="card-text" style="margin-top: 20px">{{ comment.content }}</p>
+                                            <hr>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="container">
+                                            <div class="row">
+                                                <span style="display: none">{{ answer.id }}</span>
+                                                <input type="text" class="form-control col-10 comment-text"
+                                                       placeholder="Write your comment...">
+                                                <span class="col-1"> </span>
+                                                <button class="btn form-control col-1 btn-outline-primary submit-comment">
+                                                    Post
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
 
