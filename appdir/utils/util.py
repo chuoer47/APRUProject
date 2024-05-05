@@ -1,9 +1,7 @@
 from datetime import datetime
-
-from flask import flash, redirect, url_for, session, jsonify
-
-from appdir import app, db
-from appdir.models import User, Question, Answer
+from flask import flash, redirect, url_for, session
+from appdir import db
+from appdir.models import User, Question, Answer, DailyReminder, Objectives, HospitalExaminationReports, DailyData
 
 
 def validate_register(username, password, repassword):
@@ -46,7 +44,6 @@ def addQuestion(title, question):
 
 def get_all_questions():
     questions = Question.query.all()
-
     question_data = []
     for question in questions:
         question_data.append({
@@ -71,3 +68,72 @@ def getAnswerById(questionId):
             'question_id': answer.question_id
         })
     return answer_data
+
+
+# ——————————————————————————————————
+# 下面是个人中心表单的处理函数:
+
+# dailyReminder表单处理
+def solveDailyReminder(dailyReminder):
+    if not dailyReminder:
+        flash("Please fill in all the required fields", 'error')
+        return redirect(url_for('dailyReminderForm'))
+    now_time = datetime.now()
+    dailyReminder = DailyReminder(datetime=now_time, reminder=dailyReminder)
+    db.session.add(dailyReminder)
+    db.session.commit()
+    flash("success reminder", 'success')
+    return
+
+
+# objectives表单处理
+def solveObjectivesForm(medicalAdvice, managementObjectives):
+    if not managementObjectives or not medicalAdvice:
+        flash("Please fill in all the required fields", 'error')
+        return redirect(url_for('dailyReminderForm'))
+    now_time = datetime.now()
+    objectives = Objectives(datetime=now_time, medical_advice=medicalAdvice, management_objectives=managementObjectives)
+    db.session.add(objectives)
+    db.session.commit()
+    flash("success!!", 'success')
+    return
+
+
+# reports表单处理
+def solveReportsForm(hbA1c, insulin, ogtt, insulinTest, cPeptide, diabetesAb, bloodPressure, bloodLipid):
+    if not hbA1c or not insulin or not ogtt or not insulinTest or not cPeptide or not diabetesAb or not bloodPressure or not bloodLipid:
+        flash("Please fill in all the required fields", 'error')
+        return redirect(url_for('reportsForm'))
+    now_time = datetime.now()
+    reports = HospitalExaminationReports(datetime=now_time,
+                                         HbA1c=hbA1c,
+                                         insulin=insulin,
+                                         OGTT=ogtt,
+                                         insulin_releasing_test=insulinTest,
+                                         C_peptide_release_test=cPeptide,
+                                         Diabetes_associated_antibody=diabetesAb,
+                                         blood_pressure=bloodPressure,
+                                         blood_lipid=bloodLipid)
+    db.session.add(reports)
+    db.session.commit()
+    flash("Form submitted successfully", 'success')
+    return
+
+
+def solveDailyDataForm(blood_glucose, diet_composition, exercise_amount):
+    if not blood_glucose or not diet_composition or not exercise_amount:
+        flash("Please fill in all the required fields", 'error')
+        return redirect(url_for('dailyDataForm'))
+
+    now_time = datetime.now()
+    daily_data = DailyData(datetime=now_time,
+                           blood_glucose=blood_glucose,
+                           composition_of_Diet=diet_composition,
+                           amount_of_exercise=exercise_amount)
+    db.session.add(daily_data)
+    db.session.commit()
+
+    flash("Form submitted successfully", 'success')
+    return
+
+# ——————————————————————————————————

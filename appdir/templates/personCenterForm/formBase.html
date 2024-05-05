@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <script src="../static/script/consult.js"></script>
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css" type="text/css" media="all">
+    <!-- nivo-slider CSS -->
+    <link rel="stylesheet" href="../static/css/nivo-slider.css" type="text/css" media="all">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="../static/css/animate.css" type="text/css" media="all">
+    <!-- animated-text CSS -->
+    <link rel="stylesheet" href="../static/css/all.min.css" type="text/css" media="all">
+    <!-- font-flaticon CSS -->
+    <link rel="stylesheet" href="../static/css/flaticon.css" type="text/css" media="all">
+    <!-- theme-default CSS -->
+    <link rel="stylesheet" href="../static/css/theme-default.css" type="text/css" media="all">
+    <!-- meanmenu CSS -->
+    <link rel="stylesheet" href="../static/css/meanmenu.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css" type="text/css" media="all">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="../static/css/style.css" type="text/css" media="all">
+    <!-- transitions CSS -->
+    <link rel="stylesheet" href="../static/css/owl.transitions.css" type="text/css" media="all">
+    <!-- venobox CSS -->
+    <link rel="stylesheet" href="../static/css/venobox.css" type="text/css" media="all">
+    <!-- widget CSS -->
+    <link rel="stylesheet" href="../static/css/widget.css" type="text/css" media="all">
+    <!-- responsive CSS -->
+    <link rel="stylesheet" href="../static/css/responsive.css" type="text/css" media="all">
+    <link href='../static/css/css.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../static/css/animated-text.css" type="text/css" media="all">
+    <script>
+        function clearForm() {
+            document.getElementById("questionForm").reset();
+        }
+    </script>
+    {% block form %}{% endblock %}
+
+
+    <style>
+
+        .submitBTN {
+            font-size: 22px;
+            color: white;
+            background-color: rgb(52, 146, 252);
+            width: 200px;
+            height: 50px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            margin-left: 50px;
+            border: none;
+        }
+
+        .submitBTN:hover {
+            font-size: 27px;
+            background-color: rgb(96, 166, 232);
+        }
+
+        .clearBTN {
+            font-size: 22px;
+            color: white;
+            background-color: rgb(52, 146, 252);
+            width: 200px;
+            height: 50px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            margin-left: 50px;
+            border: none;
+        }
+
+        .clearBTN:hover {
+            font-size: 27px;
+            background-color: rgb(96, 166, 232);
+        }
+    </style>
+
+{% endblock %}

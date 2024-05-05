@@ -1,73 +1,68 @@
-{% extends 'base.html' %}
-{% block content %}
-    <div class="row clearfix"
-         style="height:800px;margin-top:150px;background:linear-gradient(to bottom, rgba(27, 101, 185, 0.3), rgba(27, 101, 185, 0));">
-        <div class="container" style="">
-            <p><strong>1：What is diabetes?</strong></p>
-            <p>Diabetes is a serious condition that occurs when the pancreas is no
-                longer able to make insulin, or when the body cannot make good use of
-                the insulin it produces. This afects how your body turns food into
-                energy. In most cases, diabetes is a life-long, or chronic, condition
-                from onset. It may be associated with individual short- and long-term
-                complications. Diabetes can also have consequences with family, and at
-                school or work. More broadly, it can have a cost for health services and
-                economic systems.</p>
-            <p><strong>2：Types of diabetes</strong></p>
-            <p><img src="{{ url_for('static',filename='media/APRU糖尿病概述科普/image1.png') }}"
-                    style="width:5.76806in;height:3.08333in"/></p>
-            <p><strong>3：How Diabetes Works</strong></p>
-            <p>Insulin is a hormone that acts like a key to let glucose from the
-                food we eat pass from the blood stream into the cells in the body to
-                produce energy. All carbohydrate foods are broken down into glucose
-                which is absorbed into the blood. When a person has type 2 diabetes,
-                their body does not make good use of the insulin that it produces. This
-                is also called insulin resistance.</p>
-            <p><img src="{{ url_for('static',filename='media/APRU糖尿病概述科普/image2.png') }}"
-                    style="width:3.51263in;height:2.26162in"/> <img
-                    src="{{ url_for('static',filename='media/APRU糖尿病概述科普/image3.png') }}"
-                    style="width:2.21354in;height:2.28436in"/></p>
-            <p>When this happens, insulin cannot work properly and blood glucose
-                levels rise, increasing the demand for more insulin and putting pressure
-                on the pancreas to produce even more insulin. Type 1 diabetes occurs
-                when the body’s defence system attacks and destroys the cells in the
-                pancreas that produce insulin.   As a result, the body cannot produce
-                enough insulin or none at all.</p>
-            <p><strong>4：Warning Signs,</strong> <strong>Risk Factors of
-                Diabetes</strong></p>
-            <p>Warning Signs：</p>
-            <p>• Blurred vision • Excessive thirst • Unintentional weight loss •
-                Frequent urination</p>
-            <p>• Lack of energy • Slow healing wounds • Frequent infections</p>
-            <p>• Tingling or numbness in hands and feet</p>
-            <p>These symptoms can be mild or absent in people with type 2
-                diabetes.</p>
-            <p>Type 2 Diabetes Risk Factors：</p>
-            <p>• A family history of diabetes • Unhealthy eating habits</p>
-            <p>• Lack of physical activity • Being overweight</p>
-            <p>Other risk factors include:</p>
-            <p>• Age • High blood pressure • A history of gestational diabetes</p>
-            <p>• Poor nutrition during pregnancy</p>
-            <p>• Ethnicity (people of South Asian, Afro-Caribbean and Hispanic
-                origin and some indigenous populations are at increased risk)</p>
-            <p><img src="{{ url_for('static',filename='media/APRU糖尿病概述科普/image4.png') }}"
-                    style="width:2.92528in;height:2.66043in"/><img
-                    src="{{ url_for('static',filename='media/APRU糖尿病概述科普/image5.png') }}"
-                    style="width:2.26072in;height:2.62469in"/></p>
-            <p><strong>5：Possible Complications</strong></p>
-            <p>Diabetes can damage the fow of blood around the body and the
-                functioning of the nerves. This canlead to a number of associated
-                problems including：</p>
-            <p>• Damage to the brain, leading to strokes</p>
-            <p>• Damage to the eyes, leading to loss of vision</p>
-            <p>• Damage to the heart, leading to heart attacks</p>
-            <p>• Damage to the gums and teeth</p>
-            <p>• Damage to liver• Damage to the kidneys, leading to kidney
-                failure</p>
-            <p>• Sexual dysfunction • Foot ulcers, leading to lower-limb
-                amputation</p>
-            <p>• Higher risk of infection • Lower resistance to infectious
-                diseases</p>
-            <p>Resources：https://www.idfdiabeteschool.org</p>
-        </div>
-    </div>
+{% extends 'article/articleBase.html' %}
+{% block article_content %}
+    <p><strong>1：What is diabetes?</strong></p>
+    <p>Diabetes is a serious condition that occurs when the pancreas is no
+        longer able to make insulin, or when the body cannot make good use of
+        the insulin it produces. This afects how your body turns food into
+        energy. In most cases, diabetes is a life-long, or chronic, condition
+        from onset. It may be associated with individual short- and long-term
+        complications. Diabetes can also have consequences with family, and at
+        school or work. More broadly, it can have a cost for health services and
+        economic systems.</p>
+    <p><strong>2：Types of diabetes</strong></p>
+    <p><img src="{{ url_for('static',filename='media/APRU糖尿病概述科普/image1.png') }}"
+            style="width:5.76806in;height:3.08333in"/></p>
+    <p><strong>3：How Diabetes Works</strong></p>
+    <p>Insulin is a hormone that acts like a key to let glucose from the
+        food we eat pass from the blood stream into the cells in the body to
+        produce energy. All carbohydrate foods are broken down into glucose
+        which is absorbed into the blood. When a person has type 2 diabetes,
+        their body does not make good use of the insulin that it produces. This
+        is also called insulin resistance.</p>
+    <p><img src="{{ url_for('static',filename='media/APRU糖尿病概述科普/image2.png') }}"
+            style="width:3.51263in;height:2.26162in"/> <img
+            src="{{ url_for('static',filename='media/APRU糖尿病概述科普/image3.png') }}"
+            style="width:2.21354in;height:2.28436in"/></p>
+    <p>When this happens, insulin cannot work properly and blood glucose
+        levels rise, increasing the demand for more insulin and putting pressure
+        on the pancreas to produce even more insulin. Type 1 diabetes occurs
+        when the body’s defence system attacks and destroys the cells in the
+        pancreas that produce insulin.   As a result, the body cannot produce
+        enough insulin or none at all.</p>
+    <p><strong>4：Warning Signs,</strong> <strong>Risk Factors of
+        Diabetes</strong></p>
+    <p>Warning Signs：</p>
+    <p>• Blurred vision • Excessive thirst • Unintentional weight loss •
+        Frequent urination</p>
+    <p>• Lack of energy • Slow healing wounds • Frequent infections</p>
+    <p>• Tingling or numbness in hands and feet</p>
+    <p>These symptoms can be mild or absent in people with type 2
+        diabetes.</p>
+    <p>Type 2 Diabetes Risk Factors：</p>
+    <p>• A family history of diabetes • Unhealthy eating habits</p>
+    <p>• Lack of physical activity • Being overweight</p>
+    <p>Other risk factors include:</p>
+    <p>• Age • High blood pressure • A history of gestational diabetes</p>
+    <p>• Poor nutrition during pregnancy</p>
+    <p>• Ethnicity (people of South Asian, Afro-Caribbean and Hispanic
+        origin and some indigenous populations are at increased risk)</p>
+    <p><img src="{{ url_for('static',filename='media/APRU糖尿病概述科普/image4.png') }}"
+            style="width:2.92528in;height:2.66043in"/><img
+            src="{{ url_for('static',filename='media/APRU糖尿病概述科普/image5.png') }}"
+            style="width:2.26072in;height:2.62469in"/></p>
+    <p><strong>5：Possible Complications</strong></p>
+    <p>Diabetes can damage the fow of blood around the body and the
+        functioning of the nerves. This canlead to a number of associated
+        problems including：</p>
+    <p>• Damage to the brain, leading to strokes</p>
+    <p>• Damage to the eyes, leading to loss of vision</p>
+    <p>• Damage to the heart, leading to heart attacks</p>
+    <p>• Damage to the gums and teeth</p>
+    <p>• Damage to liver• Damage to the kidneys, leading to kidney
+        failure</p>
+    <p>• Sexual dysfunction • Foot ulcers, leading to lower-limb
+        amputation</p>
+    <p>• Higher risk of infection • Lower resistance to infectious
+        diseases</p>
+    <p>Resources：https://www.idfdiabeteschool.org</p>
 {% endblock %}

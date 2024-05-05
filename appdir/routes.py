@@ -7,20 +7,24 @@ from appdir.forms import AnswerForm
 from appdir.models import *
 from flask import render_template, redirect, url_for, flash, request, jsonify
 
-from appdir.utils.dict_article import dic_article
-from appdir.utils.util import validate_register, validate_login, addQuestion, get_all_questions, getAnswerById
+from appdir.utils.article_dataset import dic_article
+from appdir.utils.util import validate_register, validate_login, addQuestion, get_all_questions, getAnswerById, \
+    solveDailyReminder, solveObjectivesForm, solveReportsForm, solveDailyDataForm
 
 
+# 根路由
 @app.route('/', methods=['GET', 'POST'])
 def root():
     return index()
 
 
+# 首页
 @app.route('/index', methods=['GET', 'POST'])
 def index():  # put application's code here
     return render_template('index.html')
 
 
+# 首页
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -33,6 +37,7 @@ def login():
         return render_template('login.html')
 
 
+# 注册
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -45,16 +50,93 @@ def register():
         return render_template('register.html')
 
 
+# 消息页
 @app.route('/info', methods=['GET', 'POST'])
 def info():  # put application's code here
     return render_template('info.html')
 
 
+# ——————————————————————————————————————————————————————————————————
+# 个人中心
 @app.route('/personCenter', methods=['GET', 'POST'])
 def personCenter():  # put application's code here
     return render_template('personCenter.html')
 
 
+# dailyReminderForm.html
+@app.route('/dailyReminderForm', methods=['GET', 'POST'])
+def dailyReminderForm():  # put application's code here
+    if request.method == 'POST':
+        dailyReminder = request.form.get('dailyReminder')
+        solveDailyReminder(dailyReminder)
+        return render_template('personCenterForm/dailyReminderForm.html', dailyReminder=dailyReminder)
+    return render_template('personCenterForm/dailyReminderForm.html')
+
+
+@app.route('/objectivesForm', methods=['GET', 'POST'])
+def objectivesForm():  # put application's code here
+    if request.method == 'POST':
+        medicalAdvice = request.form.get('medicalAdvice')
+        managementObjectives = request.form.get('managementObjectives')
+        solveObjectivesForm(medicalAdvice, managementObjectives)
+        return render_template('personCenterForm/objectivesForm.html', medicalAdvice=medicalAdvice,
+                               managementObjectives=managementObjectives)
+    return render_template('personCenterForm/objectivesForm.html')
+
+
+# reportsForm.html
+@app.route('/reportsForm', methods=['GET', 'POST'])
+def reportsForm():  # put application's code here
+    if request.method == 'POST':
+        hbA1c = request.form.get('hbA1c')
+        insulin = request.form.get('insulin')
+        ogtt = request.form.get('ogtt')
+        insulinTest = request.form.get('insulinTest')
+        cPeptide = request.form.get('cPeptide')
+        diabetesAb = request.form.get('diabetesAb')
+        bloodPressure = request.form.get('bloodPressure')
+        bloodLipid = request.form.get('bloodLipid')
+        solveReportsForm(
+            hbA1c=hbA1c,
+            insulin=insulin,
+            ogtt=ogtt,
+            insulinTest=insulinTest,
+            cPeptide=cPeptide,
+            diabetesAb=diabetesAb,
+            bloodPressure=bloodPressure,
+            bloodLipid=bloodLipid
+        )
+        return render_template('personCenterForm/reportsForm.html',
+                               hbA1c=hbA1c,
+                               insulin=insulin,
+                               ogtt=ogtt,
+                               insulinTest=insulinTest,
+                               cPeptide=cPeptide,
+                               diabetesAb=diabetesAb,
+                               bloodPressure=bloodPressure,
+                               bloodLipid=bloodLipid)
+    return render_template('personCenterForm/reportsForm.html')
+
+
+@app.route('/dailyDataForm', methods=['GET', 'POST'])
+def dailyDataForm():  # put application's code here
+    if request.method == 'POST':
+        blood_glucose = request.form.get('blood_glucose')
+        diet_composition = request.form.get('diet_composition')
+        exercise_amount = request.form.get('exercise_amount')
+        solveDailyDataForm(blood_glucose=blood_glucose,
+                           diet_composition=diet_composition,
+                           exercise_amount=exercise_amount)
+        return render_template('personCenterForm/dailyDataForm.html',
+                               blood_glucose=blood_glucose,
+                               diet_composition=diet_composition,
+                               exercise_amount=exercise_amount)
+    return render_template('personCenterForm/dailyDataForm.html')
+
+
+# ——————————————————————————————————————————————————————————————————————
+
+# 关于我们
 @app.route('/relateUs', methods=['GET', 'POST'])
 def relateUs():  # put application's code here
     return render_template('relateUs.html')
@@ -72,18 +154,13 @@ def consult():  # put application's code here
         return render_template('consult.html')
 
 
-# 获取json格式的所有问题
-@app.route('/get_all_questions', methods=['GET', 'POST'])
-def getAllQuestions():  # put application's code here
-    return jsonify(get_all_questions())
-
-
 # 访问论坛
 @app.route('/forum', methods=['GET', 'POST'])
 def forum():
     return render_template('forum.html', questions=get_all_questions())
 
 
+# 问题详情页
 @app.route('/question<question_id>', methods=['GET', 'POST'])
 def question(question_id):
     current_question = Question.query.filter(Question.id == question_id).first()
@@ -95,12 +172,11 @@ def question(question_id):
 
 
 # ————————————————————————————————————————————————————————————
-# 以下为文章的路由地址，由于我不会统一开发，只能这样子
-
+# 以下为文章的路由地址
 
 @app.route('/article<id>', methods=['GET', 'POST'])
 def article(id):
-    link = dic_article[id]
+    link = dic_article[int(id)]
     return render_template(link)
 
 
