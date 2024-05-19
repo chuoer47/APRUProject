@@ -10,7 +10,7 @@ from flask import render_template, redirect, url_for, flash, request, jsonify
 from appdir.utils.dataSet import dic_article
 from appdir.utils.util import validate_register, validate_login, addQuestion, get_all_questions, getAnswerById, \
     solveDailyReminder, solveObjectivesForm, solveReportsForm, solveDailyDataForm, getDailyReminder, getDailyData, \
-    get_all_articles
+    get_all_articles, getReportData, getObjectivesData
 
 
 # 根路由
@@ -64,9 +64,13 @@ def info():  # put application's code here
 def personCenter():  # put application's code here
     reminder_data = getDailyReminder()
     daily_data = getDailyData()
+    report_data = getReportData()
+    objectives_data = getObjectivesData()
     return render_template('personCenter.html',
                            reminder_data=reminder_data,
-                           daily_data=daily_data)
+                           daily_data=daily_data,
+                           report_data=report_data,
+                           objectives_data=objectives_data)
 
 
 # dailyReminderForm.html
@@ -183,6 +187,7 @@ def question(question_id):
 @app.route('/article<id>', methods=['GET', 'POST'])
 def article(id):
     link = dic_article[int(id)]
+    print(link)
     return render_template(link)
 
 

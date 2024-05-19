@@ -1,121 +1,117 @@
 {% extends 'personCenterForm/formBase.html' %}
 {% block form %}
-    <div class="row clearfix"
-         style="height:800px;margin-top:150px;background:linear-gradient(to bottom, rgba(27, 101, 185, 0.3), rgba(27, 101, 185, 0));">
-        <div class="container" style="">
-            <div class="row align-items-center" style="display:flex;justify-content: center;align-items: center;">
-                <div class="col-lg-6" style="width:1000px">
-                    <div class="single_login" style="background-color:white;margin-top:50px;">
-                        <div class="login-title">
-                            <h3>Hospital examination reports</h3>
+
+    <div class="row align-items-center" style="display:flex;justify-content: center;align-items: center;">
+        <div class="col-lg-6" style="width:1000px">
+            <div class="single_login" style="background-color:white;margin-top:50px;">
+                <div class="login-title">
+                    <h3>Hospital examination reports</h3>
+                </div>
+                <div class="login-text">
+                    <p>Please input your Hospital examination reports</p>
+                    {% for message in get_flashed_messages() %}
+                        {% if message %}
+                            <div style="color:red">{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <form id="questionForm" role="form" action="/reportsForm" method="post" novalidate>
+                        <div class="col-lg-12">
+                            <div class="form_box">
+                                <label for="hbA1c">Glycosylated hemoglobin (HbA1c)</label>
+                                <input type="text" id="hbA1c" name="hbA1c"
+                                       placeholder="Enter HbA1c value"
+                                       {% if hbA1c %}value="{{ hbA1c }}"{% endif %}
+                                       {% if hbA1c %}readonly{% endif %}>
+                                <span><i class="bi bi-envelope"></i></span>
+                            </div>
                         </div>
-                        <div class="login-text">
-                            <p>Please input your Hospital examination reports</p>
-                            {% for message in get_flashed_messages() %}
-                                {% if message %}
-                                    <div style="color:red">{{ message }}</div>
-                                {% endif %}
-                            {% endfor %}
+
+                        <div class="col-lg-12">
+                            <div class="form_box">
+                                <label for="insulin">Serum insulin</label>
+                                <input type="text" id="insulin" name="insulin"
+                                       placeholder="Enter insulin value"
+                                       {% if insulin %}value="{{ insulin }}"{% endif %}
+                                       {% if insulin %}readonly{% endif %}>
+                                <span><i class="bi bi-envelope"></i></span>
+                            </div>
                         </div>
-                        <div class="row">
-                            <form id="questionForm" role="form" action="/reportsForm" method="post" novalidate>
-                                <div class="col-lg-12">
-                                    <div class="form_box">
-                                        <label for="hbA1c">Glycosylated hemoglobin (HbA1c)</label>
-                                        <input type="text" id="hbA1c" name="hbA1c"
-                                               placeholder="Enter HbA1c value"
-                                               {% if hbA1c %}value="{{ hbA1c }}"{% endif %}
-                                               {% if hbA1c %}readonly{% endif %}>
-                                        <span><i class="bi bi-envelope"></i></span>
-                                    </div>
-                                </div>
 
-                                <div class="col-lg-12">
-                                    <div class="form_box">
-                                        <label for="insulin">Serum insulin</label>
-                                        <input type="text" id="insulin" name="insulin"
-                                               placeholder="Enter insulin value"
-                                               {% if insulin %}value="{{ insulin }}"{% endif %}
-                                               {% if insulin %}readonly{% endif %}>
-                                        <span><i class="bi bi-envelope"></i></span>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form_box">
-                                        <label for="ogtt">Oral glucose tolerance test (OGTT)</label>
-                                        <input type="text" id="ogtt" name="ogtt"
-                                               placeholder="Enter OGTT value"
-                                               {% if ogtt %}value="{{ ogtt }}"{% endif %}
-                                               {% if ogtt %}readonly{% endif %}>
-                                        <span><i class="bi bi-envelope"></i></span>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form_box">
-                                        <label for="insulinTest">Insulin releasing test</label>
-                                        <input type="text" id="insulinTest" name="insulinTest"
-                                               placeholder="Enter insulin releasing test value"
-                                               {% if insulinTest %}value="{{ insulinTest }}"{% endif %}
-                                               {% if insulinTest %}readonly{% endif %}>
-                                        <span><i class="bi bi-envelope"></i></span>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form_box">
-                                        <label for="cPeptide">C-peptide release test</label>
-                                        <input type="text" id="cPeptide" name="cPeptide"
-                                               placeholder="Enter C-peptide release test value"
-                                               {% if cPeptide %}value="{{ cPeptide }}"{% endif %}
-                                               {% if cPeptide %}readonly{% endif %}>
-                                        <span><i class="bi bi-envelope"></i></span>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form_box">
-                                        <label for="diabetesAb">Diabetes-associated antibodies</label>
-                                        <input type="text" id="diabetesAb" name="diabetesAb"
-                                               placeholder="Enter diabetes-associated antibody value"
-                                               {% if diabetesAb %}value="{{ diabetesAb }}"{% endif %}
-                                               {% if diabetesAb %}readonly{% endif %}>
-                                        <span><i class="bi bi-envelope"></i></span>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form_box">
-                                        <label for="bloodPressure">Blood pressure</label>
-                                        <input type="text" id="bloodPressure" name="bloodPressure"
-                                               placeholder="Enter blood pressure value"
-                                               {% if bloodPressure %}value="{{ bloodPressure }}"{% endif %}
-                                               {% if bloodPressure %}readonly{% endif %}>
-                                        <span><i class="bi bi-envelope"></i></span>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                    <div class="form_box">
-                                        <label for="bloodLipid">Blood lipid</label>
-                                        <input type="text" id="bloodLipid" name="bloodLipid"
-                                               placeholder="Enter blood lipid value"
-                                               {% if bloodLipid %}value="{{ bloodLipid }}"{% endif %}
-                                               {% if bloodLipid %}readonly{% endif %}>
-                                        <span><i class="bi bi-envelope"></i></span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12">
-                                    <div class="form-submit"
-                                         style="display:flex;justify-content: center;align-items: center;">
-                                        <button type="submit" class="submitBTN">Submit</button>
-                                        <button type="button" onclick="clearForm()" class="clearBTN">Clear</button>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="col-lg-12">
+                            <div class="form_box">
+                                <label for="ogtt">Oral glucose tolerance test (OGTT)</label>
+                                <input type="text" id="ogtt" name="ogtt"
+                                       placeholder="Enter OGTT value"
+                                       {% if ogtt %}value="{{ ogtt }}"{% endif %}
+                                       {% if ogtt %}readonly{% endif %}>
+                                <span><i class="bi bi-envelope"></i></span>
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="col-lg-12">
+                            <div class="form_box">
+                                <label for="insulinTest">Insulin releasing test</label>
+                                <input type="text" id="insulinTest" name="insulinTest"
+                                       placeholder="Enter insulin releasing test value"
+                                       {% if insulinTest %}value="{{ insulinTest }}"{% endif %}
+                                       {% if insulinTest %}readonly{% endif %}>
+                                <span><i class="bi bi-envelope"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form_box">
+                                <label for="cPeptide">C-peptide release test</label>
+                                <input type="text" id="cPeptide" name="cPeptide"
+                                       placeholder="Enter C-peptide release test value"
+                                       {% if cPeptide %}value="{{ cPeptide }}"{% endif %}
+                                       {% if cPeptide %}readonly{% endif %}>
+                                <span><i class="bi bi-envelope"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form_box">
+                                <label for="diabetesAb">Diabetes-associated antibodies</label>
+                                <input type="text" id="diabetesAb" name="diabetesAb"
+                                       placeholder="Enter diabetes-associated antibody value"
+                                       {% if diabetesAb %}value="{{ diabetesAb }}"{% endif %}
+                                       {% if diabetesAb %}readonly{% endif %}>
+                                <span><i class="bi bi-envelope"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form_box">
+                                <label for="bloodPressure">Blood pressure</label>
+                                <input type="text" id="bloodPressure" name="bloodPressure"
+                                       placeholder="Enter blood pressure value"
+                                       {% if bloodPressure %}value="{{ bloodPressure }}"{% endif %}
+                                       {% if bloodPressure %}readonly{% endif %}>
+                                <span><i class="bi bi-envelope"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form_box">
+                                <label for="bloodLipid">Blood lipid</label>
+                                <input type="text" id="bloodLipid" name="bloodLipid"
+                                       placeholder="Enter blood lipid value"
+                                       {% if bloodLipid %}value="{{ bloodLipid }}"{% endif %}
+                                       {% if bloodLipid %}readonly{% endif %}>
+                                <span><i class="bi bi-envelope"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-submit"
+                                 style="display:flex;justify-content: center;align-items: center;">
+                                <button type="submit" class="submitBTN">Submit</button>
+                                <button type="button" onclick="clearForm()" class="clearBTN">Clear</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

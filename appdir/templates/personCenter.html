@@ -6,10 +6,16 @@
             <div class="col-md-12 column">
                 <div class="container">
                     <h1>Daily Reminder</h1>
+                    <div><a href="/dailyReminderForm">Add Daily Reminder</a></div>
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>TODO-{{ reminder_data[0].datetime }}</th>
+                            {% if not reminder_data %}
+                                <th>TODO</th>
+                            {% else %}
+                                <th>TODO-{{ reminder_data[0].datetime }}</th>
+                            {% endif %}
+
                         </tr>
                         </thead>
                         <tbody>
@@ -25,6 +31,7 @@
             <div class="col-md-12 column">
                 <div class="container">
                     <h1>Daily Data</h1>
+                    <div><a href="/dailyDataForm">Add Daily Data</a></div>
                     <table class="table">
                         <thead>
                         <tr>
@@ -40,6 +47,64 @@
                                 <td>{{ item.blood_glucose }}</td>
                                 <td>{{ item.amount_of_exercise }}</td>
                                 <td>{{ item.composition_of_Diet }}</td>
+                                <td>{{ item.datetime }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-12 column">
+                <div class="container">
+                    <h1>Reports Data</h1>
+                    <div><a href="/reportsForm">Add Reports Data</a></div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>hbA1c</th>
+                            <th>insulin</th>
+                            <th>ogtt</th>
+                            <th>insulinTest</th>
+                            <th>cPeptide</th>
+                            <th>diabetesAb</th>
+                            <th>bloodPressure</th>
+                            <th>bloodLipid</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in report_data %}
+                            <tr>
+                                <td>{{ item.hbA1c }}</td>
+                                <td>{{ item.insulin }}</td>
+                                <td>{{ item.ogtt }}</td>
+                                <td>{{ item.insulinTest }}</td>
+                                <td>{{ item.cPeptide }}</td>
+                                <td>{{ item.diabetesAb }}</td>
+                                <td>{{ item.bloodPressure }}</td>
+                                <td>{{ item.bloodLipid }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-12 column">
+                <div class="container">
+                    <h1>Objectives Data</h1>
+                    <div><a href="/objectivesForm">Add Objectives Data</a></div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>medical advice</th>
+                            <th>management_objectives</th>
+                            <th>datetime</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in objectives_data %}
+                            <tr>
+                                <td>{{ item.medical_advice }}</td>
+                                <td>{{ item.management_objectives }}</td>
                                 <td>{{ item.datetime }}</td>
                             </tr>
                         {% endfor %}

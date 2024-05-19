@@ -1,10 +1,18 @@
 from datetime import datetime
 
 from flask import flash, redirect, url_for, session
+from sqlalchemy import desc
 
 from appdir import db
 from appdir.models import User, Question, Answer, DailyReminder, Objectives, HospitalExaminationReports, DailyData, \
     Article
+
+
+def datetime2day(datetime):
+    # 处理一下日期格式
+    datetime = str(datetime)
+    datetime = datetime.split(" ")[0]
+    return datetime
 
 
 # ——————————————————————————————————————
@@ -176,35 +184,84 @@ def solveDailyDataForm(blood_glucose, diet_composition, exercise_amount):
 # ——————————————————————————————————
 # 下面为个人中心需要的网页资源获取函数
 def getDailyReminder():
-    reminders = DailyReminder.query.first()
-    # 处理一下日期格式
-    datetime = str(reminders.datetime)
-    datetime = datetime.split(" ")[0]
-    print(datetime)
-    reminders_data = [{
-        'id': reminders.id,
-        'datetime': datetime,
-        'user_id': reminders.user_id,
-        'reminder': reminders.reminder
-    }]
-    return reminders_data
+    try:
+        reminders = DailyReminder.query.order_by(desc(DailyReminder.datetime)).first()
+        # 处理一下日期格式
+        datetime = str(reminders.datetime)
+        datetime = datetime.split(" ")[0]
+        reminders_data = [{
+            'id': reminders.id,
+            'datetime': datetime,
+            'user_id': reminders.user_id,
+            'reminder': reminders.reminder
+        }]
+        return reminders_data
+    except:
+        return []
+
+
+def getReportData():
+    try:
+        reportDatas = HospitalExaminationReports.query.all()
+        reportData = []
+        for item in reportDatas:
+            # 处理一下日期格式
+            datetime = str(item.datetime)
+            datetime = datetime.split(" ")[0]
+            reportData.append({
+                'id': item.id,
+                'datetime': datetime,
+                'user_id': item.user_id,
+                'hbA1c': item.HbA1c,
+                'insulin': item.insulin,
+                'ogtt': item.OGTT,
+                'insulinTest': item.insulin_releasing_test,
+                'cPeptide': item.C_peptide_release_test,
+                'diabetesAb': item.Diabetes_associated_antibody,
+                'bloodPressure': item.blood_pressure,
+                'bloodLipid': item.blood_lipid
+            })
+        return reportData
+    except:
+        return []
+
+
+def getObjectivesData():
+    try:
+        Datas = Objectives.query.all()
+        data = []
+        for item in Datas:
+            # 处理一下日期格式
+            datetime = str(item.datetime)
+            datetime = datetime.split(" ")[0]
+            data.append({
+                'id': item.id,
+                'datetime': datetime,
+                'medical_advice': item.medical_advice,
+                'management_objectives': item.management_objectives
+            })
+        return data
+    except:
+        return []
 
 
 def getDailyData():
-    dailyDatas = DailyData.query.all()
-    dailyData = []
-
-    for daily_data in dailyDatas:
-        # 处理一下日期格式
-        datetime = str(daily_data.datetime)
-        datetime = datetime.split(" ")[0]
-        dailyData.append({
-            'id': daily_data.id,
-            'datetime': datetime,
-            'user_id': daily_data.user_id,
-            'blood_glucose': daily_data.blood_glucose,
-            'amount_of_exercise': daily_data.amount_of_exercise,
-            'composition_of_Diet': daily_data.composition_of_Diet
-        })
-    return dailyData
+    try:
+        dailyDatas = DailyData.query.all()
+        dailyData = []
+        for daily_data in dailyDatas:
+            # 处理一下日期格式
+            datetime = str(daily_data.datetime)
+            datetime = datetime.split(" ")[0]
+            dailyData.append({
+                'id': daily_data.id,
+                'datetime': datetime,
+                'user_id': daily_data.user_id,
+                'blood_glucose': daily_data.blood_glucose,
+                'amount_of_exercise': daily_data.amount_of_exercise,
+                'composition_of_Diet': daily_data.composition_of_Diet
+            })
+        return dailyData
+    except:
+        return []
 # ——————————————————————————————————

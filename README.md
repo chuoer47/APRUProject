@@ -56,4 +56,5 @@ pyinstaller APRUapp.spec
 
 - 登录
 - 注册
+- 个人数据查看
 
