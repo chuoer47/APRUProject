@@ -1,6 +1,8 @@
 dic_article = {
     1: 'article/Diabetes Overview.html',
-    2: 'article/Blood glucose management.html'
+    2: 'article/Blood glucose management.html',
+    3:'article/Prevention and Prognosis.html',
+    4:'article/Individual antidiabetic drugs and diabesity.html'
 }
 
 forum_data = [
