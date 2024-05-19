@@ -7,9 +7,10 @@ from appdir.forms import AnswerForm
 from appdir.models import *
 from flask import render_template, redirect, url_for, flash, request, jsonify
 
-from appdir.utils.article_dataset import dic_article
+from appdir.utils.dataSet import dic_article
 from appdir.utils.util import validate_register, validate_login, addQuestion, get_all_questions, getAnswerById, \
-    solveDailyReminder, solveObjectivesForm, solveReportsForm, solveDailyDataForm, getDailyReminder, getDailyData
+    solveDailyReminder, solveObjectivesForm, solveReportsForm, solveDailyDataForm, getDailyReminder, getDailyData, \
+    get_all_articles
 
 
 # 根路由
@@ -53,7 +54,8 @@ def register():
 # 消息页
 @app.route('/info', methods=['GET', 'POST'])
 def info():  # put application's code here
-    return render_template('info.html')
+    return render_template('info.html', articles=get_all_articles())
+
 
 
 # ——————————————————————————————————————————————————————————————————

@@ -1,7 +1,10 @@
 from datetime import datetime
+
 from flask import flash, redirect, url_for, session
+
 from appdir import db
-from appdir.models import User, Question, Answer, DailyReminder, Objectives, HospitalExaminationReports, DailyData
+from appdir.models import User, Question, Answer, DailyReminder, Objectives, HospitalExaminationReports, DailyData, \
+    Article
 
 
 # ——————————————————————————————————————
@@ -82,6 +85,19 @@ def getAnswerById(questionId):
             'question_id': answer.question_id
         })
     return answer_data
+
+
+# 获得所有文章
+def get_all_articles():
+    datas = Article.query.all()
+    resultList = []
+    for data in datas:
+        resultList.append({
+            'id': data.id,
+            'title': data.title,
+            'path': data.path
+        })
+    return resultList
 
 
 # ——————————————————————————————————

@@ -3,7 +3,7 @@
     <script src="../static/script/forum.js"></script>
     <link rel="stylesheet" href="../static/css/forum.css" type="text/css" media="all">
     <div class="container">
-        <h1 style="margin-top:150px;margin-left:30px;">论坛开发ing</h1>
+        <h1 style="margin-top:150px;margin-left:30px;">Think what you think, answer what you ask.</h1>
         <div class="forum-container">
 
             <div class="left_row">
@@ -25,10 +25,8 @@
                                     <a id="tips" class="showMore" onclick="expand(this,{{ question.id }})">Show more</a>
                                 </div>
                                 <div class="otherItem">
-                                    <p class="time" style="font-size:15px;">{{ question.time }}</p>
-                                    这里显示问题的时间
                                     <a href="/question{{ question.id }}" class="check-answer">View answers</a>
-                                    <span class="card-text info text-muted">{{ question.answers }} Answers</span>
+
                                 </div>
                             </div>
                         </div>

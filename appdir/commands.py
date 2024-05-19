@@ -1,8 +1,11 @@
 """该类存储flask shell命令"""
+from datetime import datetime
 
-from appdir import routes, models, app, db
 import click
-from appdir.models import User
+
+from appdir import app, db
+from appdir.models import User, Article, Question, Answer
+from appdir.utils.dataSet import dic_article, forum_data
 
 
 # 测试shell命令的代码
@@ -43,3 +46,31 @@ def admin(username, password):
 
     db.session.commit()
     click.echo('Done.')
+
+
+@app.cli.command("addArticle")
+def addArticle():
+    for key, v in dic_article.items():
+        title = v.split("/")[1]
+        title = title.split(".")[0]
+        article = Article(id=key, path=v, title=title)
+        db.session.add(article)
+    db.session.commit()
+    click.echo('add articles!')
+
+
+@app.cli.command("initForum")
+def initForum():
+    for item in forum_data:
+        questionId = item['id']
+        question = item['Q']
+        title = item['title']
+        answers = item['A']
+        # 录入问题
+        q = Question(id=questionId, title=title, question=question, datetime=datetime.now())
+        db.session.add(q)
+        for answer in answers:
+            a = Answer(content=answer, question_id=questionId)
+            db.session.add(a)
+        db.session.commit()
+    click.echo('init forum success!')

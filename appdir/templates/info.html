@@ -1,36 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
     <script src="../static/script/info.js"></script>
+    <link href="../static/css/forum.css" media="all" rel="stylesheet" type="text/css">
+    <div class="container">
+        <h1 style="margin-top:150px;margin-left:30px;">Information</h1>
+        <div class="forum-container">
+            <div class="left_row">
+                <div class="navi-forum"></div>
+                <div class="forum-info">
+                    {% for article in articles %}
+                        <div class="forum-msg">
+                            <div class="content">
+                                <div class="title">{{ article.title }}</div>
+                                <div class="otherItem">
+                                    <p class="time" style="font-size:15px;"></p>
+                                    <a class="check-answer" href="/article{{ article.id }}">view text</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
 
-    <div class="container" style="margin-top:150px">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <h3>
-                    h3. 这是一套可视化布局系统.
-                </h3>
-                <p class="text-left">
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong>
-                    编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small>
-                    社区中。
-                </p>
-                <p class="text-left">
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong>
-                    编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small>
-                    社区中。
-                </p>
-                <p>
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong>
-                    编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small>
-                    社区中。
-                </p>
-                <p>
-                    <em>Git</em> 是一个分布式的版本控制系统，最初由 <strong>Linus Torvalds</strong>
-                    编写，用作Linux内核代码的管理。在推出后，Git在其它项目中也取得了很大成功，尤其是在 <small>Ruby</small>
-                    社区中。
-                </p>
+            <div class="right_row">
+                <div class="news-info">
+                </div>
             </div>
         </div>
     </div>
-
-
 {% endblock %}
